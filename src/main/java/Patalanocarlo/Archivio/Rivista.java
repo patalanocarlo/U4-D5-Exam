@@ -7,7 +7,7 @@ public class Rivista extends ElementoCatalogo {  //Estendo a Rivista il suo Padr
     }
     private Periodicità periodicità;
 
-    public Rivista(String isbn, String Titolo, int annoPubblicazione, int numeroPagine) { //Mi passo i parametri del padre e faccio il super.
+    public Rivista(String isbn, String Titolo, int annoPubblicazione, int numeroPagine, Periodicità mensile) { //Mi passo i parametri del padre e faccio il super.
         super(isbn, Titolo, annoPubblicazione, numeroPagine);
         this.periodicità=periodicità;
     }
