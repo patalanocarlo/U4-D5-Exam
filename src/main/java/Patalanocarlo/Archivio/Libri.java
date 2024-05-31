@@ -4,6 +4,9 @@ public class Libri extends ElementoCatalogo{ //Estendo al figlio Il suo genitore
     private String autore; //Definisco gli attribuiti Specifici per i libri.
     private String genere;
 
+
+    
+
     public Libri(String isbn, String Titolo, int annoPubblicazione, int numeroPagine, String autore, String genere){
         super(isbn,Titolo,annoPubblicazione,numeroPagine);  //Passo i valori del super del Padre.
         this.autore=autore; //Mi passo gli attributi del this dei valori del figlio.
@@ -28,6 +31,6 @@ public class Libri extends ElementoCatalogo{ //Estendo al figlio Il suo genitore
 
     //To string finale per avere il return del libro annessi con il super.
     public String toString(){
-        return  "Libro:{ " + "autore: " + autore + "Genere: " + genere + " } "+ super.toString();
+        return  "Libro:{ " + "autore: " + autore + " " + "Genere: " + genere + " } "+ super.toString();
     }
 }

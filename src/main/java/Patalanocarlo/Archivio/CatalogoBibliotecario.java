@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class CatalogoBibliotecario {
 
-    private List<ElementoCatalogo> catalogo;
+   public List<ElementoCatalogo> catalogo;
 
 
     public CatalogoBibliotecario() {
@@ -33,6 +33,10 @@ public class CatalogoBibliotecario {
     public Optional<ElementoCatalogo> RicercaIsbn(String isbn){
         return catalogo.stream().filter(e -> e.getIsbn().equals(isbn)).findFirst();
     }
+    //Ricerca per l'anno di pubblicazione
+    public List<ElementoCatalogo> ricercaPerAnnoPubblicazione(int anno) {
+        return catalogo.stream().filter(e -> e.getAnnoPubblicazione() == anno).collect(Collectors.toList());
+    }
 
     //Qui vado a ricercare l'autore in base al filtro e al libro preso vado a fare una get sul autore
     public  List<ElementoCatalogo> RicercaPerAutore(String autore){
@@ -43,6 +47,11 @@ public class CatalogoBibliotecario {
     public void salvaCatalogoSopraIlDisco(String file) throws IOException{
         ObjectMapper objectMapper= new ObjectMapper();
         ElementoCatalogo[] elementi = objectMapper.readValue(new File(file), ElementoCatalogo[].class);
+        catalogo = new ArrayList<>(List.of(elementi));
+    }
+    public void caricaCatalogoDaDisco(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ElementoCatalogo[] elementi = objectMapper.readValue(new File(filePath), ElementoCatalogo[].class);
         catalogo = new ArrayList<>(List.of(elementi));
     }
 }
