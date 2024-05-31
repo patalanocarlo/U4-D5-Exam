@@ -1,6 +1,11 @@
 package Patalanocarlo.Archivio;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,5 +39,10 @@ public class CatalogoBibliotecario {
         return catalogo.stream()
                 .filter(e -> e instanceof Libri && ((Libri) e).getAutore().equalsIgnoreCase(autore))
                 .collect(Collectors.toList());
+    }
+    public void salvaCatalogoSopraIlDisco(String file) throws IOException{
+        ObjectMapper objectMapper= new ObjectMapper();
+        ElementoCatalogo[] elementi = objectMapper.readValue(new File(file), ElementoCatalogo[].class);
+        catalogo = new ArrayList<>(List.of(elementi));
     }
 }
