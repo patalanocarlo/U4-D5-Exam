@@ -13,6 +13,8 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) {
         CatalogoBibliotecario catalogo = new CatalogoBibliotecario();
+
+        //Creo le liste 2 di libri e 1 per una rivista.
         Libri libro_1 = new Libri("23553", " Il signore Degli Anelli", 1949, 1500, "TOLKIEN", "Fantasy");
         Libri libro_2 = new Libri("348893", "Macchine Mortali", 2012, 1230, "Philip Reeve", "SteamPunk");
         Rivista rivista1 = new Rivista("0987654321", "National Geographic", 2021, 100, Rivista.Periodicità.MENSILE);
