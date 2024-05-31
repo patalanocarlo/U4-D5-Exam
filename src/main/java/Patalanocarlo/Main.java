@@ -7,6 +7,7 @@ import Patalanocarlo.Archivio.Rivista;
 
 import java.io.IOException;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Main {
@@ -24,20 +25,37 @@ public class Main {
         System.out.println("Ecco l'aggiunta di tutto il catalogo:");
       catalogo.catalogo.forEach(System.out::println);
 
-        //Vado a fare la ricerca per ISBN:
-        System.out.println("Ecco la ricerca Per Isbn: ");
-        System.out.println(catalogo.RicercaIsbn("23553").orElse(null));
-         //Qui invece effettuo la ricerca per anno di pubblicazione
+      //Aggiungo un ulteriore controllo che se è vuoto mi stampa un messaggio di eccezzione.
+        if (catalogo.catalogo.isEmpty()) {
+            System.out.println("Non c'è nulla da aggiungere al catalogo.");
+        } else {
+            System.out.println("Ecco l'aggiunta di tutto il catalogo:");
+            catalogo.catalogo.forEach(System.out::println);
+        }
+
+
+
+
+        // Ricerca per ISBN:
+        System.out.println("Ecco la ricerca Per ISBN:");
+        Optional<ElementoCatalogo> risultatoIsbn = catalogo.RicercaIsbn("23553");
+        if (risultatoIsbn.isPresent()) {
+            System.out.println(risultatoIsbn.get());
+        } else {
+            System.out.println("Mi dispiace, non esiste questo ISBN nel catalogo.");
+        }
+
+// Ricerca per anno di pubblicazione:
         System.out.println("Ricerca per anno di pubblicazione:");
-        catalogo.ricercaPerAnnoPubblicazione(2012).forEach(System.out::println);
-
-        //qui effettuo la ricerca per autore
-        System.out.println("Ricerca per autore:");
-        catalogo.RicercaPerAutore("TOLKIEN").forEach(System.out::println);
-
+        List<ElementoCatalogo> risultatiAnno = catalogo.ricercaPerAnnoPubblicazione(2012);
+        if (!risultatiAnno.isEmpty()) {
+            risultatiAnno.forEach(System.out::println);
+        } else {
+            System.out.println("Mi dispiace, non ci sono elementi nel catalogo pubblicati nell'anno specificato.");
+        }
 
        try {
-            catalogo.salvaCatalogoSopraIlDisco("catalogo.json");
+            catalogo.salvaCatalogoSopraIlDisco("C:\\Users\\patal\\OneDrive\\Desktop\\Java Model\\U4-D5-Exam\\src\\main\\catalogo.json");
             System.out.println("Archivio salvato su disco con successo.");
         } catch (IOException e) {
             System.err.println("Si è verificato un errore durante il salvataggio dell'archivio su disco:");
@@ -47,7 +65,7 @@ public class Main {
 // Caricamento dal disco dell'archivio in una nuova lista
         CatalogoBibliotecario nuovoCatalogo = new CatalogoBibliotecario();
         try {
-            nuovoCatalogo.caricaCatalogoDaDisco("catalogo.json");
+            nuovoCatalogo.caricaCatalogoDaDisco("C:\\Users\\patal\\OneDrive\\Desktop\\Java Model\\U4-D5-Exam\\src\\main\\catalogo.json");
             System.out.println("Archivio caricato da disco con successo.");
         } catch (IOException e) {
             System.err.println("Si è verificato un errore durante il caricamento dell'archivio da disco:");
