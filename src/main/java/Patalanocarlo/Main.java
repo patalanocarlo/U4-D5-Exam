@@ -91,6 +91,7 @@ public class Main {
          // Rimozione di un elemento
         catalogo.RimuoviElemento("348893");
 
+
         System.out.println("Catalogo dopo la rimozione:");
         catalogo.catalogo.forEach(System.out::println);
 
